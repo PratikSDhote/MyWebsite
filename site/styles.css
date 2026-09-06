@@ -113,6 +113,27 @@ button{cursor:pointer}
 .press-actions{margin-top:14px}
 .press-actions .btn{margin-top:6px}
 
+/* Social Links / Artist Profiles */
+.socials{display:flex;gap:16px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.social-link{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;transition:all .3s ease;background:var(--surface);border:1px solid rgba(255,255,255,0.08);position:relative}
+.social-link:focus{outline:3px solid rgba(255,107,107,0.18);outline-offset:2px}
+
+/* Brand Colors */
+.social-link.instagram{color:#e1306c}
+.social-link.instagram:hover{background:#e1306c;color:white;transform:scale(1.1);box-shadow:0 8px 24px rgba(225,48,108,0.3)}
+
+.social-link.youtube{color:#ff0000}
+.social-link.youtube:hover{background:#ff0000;color:white;transform:scale(1.1);box-shadow:0 8px 24px rgba(255,0,0,0.3)}
+
+.social-link.facebook{color:#1877f2}
+.social-link.facebook:hover{background:#1877f2;color:white;transform:scale(1.1);box-shadow:0 8px 24px rgba(24,119,242,0.3)}
+
+.social-link.spotify{color:#1db954}
+.social-link.spotify:hover{background:#1db954;color:white;transform:scale(1.1);box-shadow:0 8px 24px rgba(29,185,84,0.3)}
+
+.social-link.apple{color:#555555}
+.social-link.apple:hover{background:#555555;color:white;transform:scale(1.1);box-shadow:0 8px 24px rgba(85,85,85,0.3)}
+
 .modal{position:fixed;inset:0;background:rgba(2,2,2,0.85);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
 .modal[aria-hidden="false"]{display:flex}
 .modal-inner{width:100%;max-width:1000px}
@@ -130,6 +151,7 @@ button{cursor:pointer}
   .lyrics-btn-track{padding:10px 16px;font-size:13px}
   .video-grid{grid-template-columns:1fr;max-width:100%}
   .lyrics-modal-content{max-height:90vh}
+  .socials{gap:12px}
 }
 
 @media (max-width:600px){
