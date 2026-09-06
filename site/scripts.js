@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded',function(){
   const lyricsTexts = document.querySelectorAll('.lyrics-text');
   
   const lyricFiles = {
-    charitra: '../Lyrics/charitra.txt',
-    backbone: '../Lyrics/backbone.txt',
-    legacy: '../Lyrics/Legacy.txt'
+    charitra: '/Lyrics/charitra.txt',
+    backbone: '/Lyrics/backbone.txt',
+    legacy: '/Lyrics/Legacy.txt'
   };
 
   // Fetch and display lyrics
