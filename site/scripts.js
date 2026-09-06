@@ -33,13 +33,18 @@ document.addEventListener('DOMContentLoaded',function(){
         if(response.ok){
           const text = await response.text();
           textDiv.textContent = text;
+          textDiv.style.display = 'block';
         }else{
           textDiv.textContent = 'Lyrics not available.';
+          textDiv.style.display = 'block';
         }
       }catch(e){
         console.error(`Error loading ${song} lyrics:`, e);
         textDiv.textContent = 'Error loading lyrics.';
+        textDiv.style.display = 'block';
       }
+    }else{
+      textDiv.style.display = 'block';
     }
   }
 
