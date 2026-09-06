@@ -3,11 +3,13 @@ ANARTH (∆N∆RTH) — Local site
 Quick local preview:
 
 ```cmd
-cd /d g:\MyWebsite\site
-python -m http.server 8000
+cd /d g:\MyWebsite
+npx http-server -p 8000 --cors
 
-# then open http://localhost:8000
+# then open http://localhost:8000/site/index.html
 ```
+
+**IMPORTANT**: The server must be started from the `MyWebsite` root directory (not from the `site/` subfolder) so that fetch requests to `../Lyrics/` files work correctly.
 
 What this build includes:
 - Hero with background video (uses `Assets/video/VID_20260825223617.mp4`)

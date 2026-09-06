@@ -34,15 +34,17 @@ document.addEventListener('DOMContentLoaded',function(){
     // Fetch and display lyrics
     try{
       const response = await fetch(file);
+      console.log(`Fetching ${file}: status ${response.status}`);
       if(response.ok){
         const text = await response.text();
         lyricsModalBody.textContent = text;
       }else{
-        lyricsModalBody.textContent = 'Lyrics not available.';
+        console.error(`HTTP ${response.status} when fetching ${file}`);
+        lyricsModalBody.textContent = `Lyrics not available (HTTP ${response.status}).`;
       }
     }catch(e){
-      console.error(`Error loading ${song} lyrics:`, e);
-      lyricsModalBody.textContent = 'Error loading lyrics. Please try again.';
+      console.error(`Error loading ${song} lyrics from ${file}:`, e);
+      lyricsModalBody.textContent = `Error loading lyrics: ${e.message}`;
     }
 
     // Show modal
