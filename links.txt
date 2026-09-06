@@ -18,6 +18,7 @@ Apple Music: https://music.apple.com/my/album/backbone-single/6788281408
 JioSaavn: https://www.jiosaavn.com/song/backbone/SC8mSQd,fmU
 Amazon Music: amazon music: https://music.amazon.in/tracks/B0H7WN4253?marketplaceId=A21TJRUUN4KGV&musicTerritory=IN&ref=dm_sh_pPbzFIEY5b0SbfrOFF6QzZbn3
 YT Music: YT Music: https://music.youtube.com/playlist?list=OLAK5uy_lpdV8DATrjfbBpeUS-V0DGhJmHJ_RFNtM&si=zYqH1SZdu6osuDui
+Gaana: https://gaana.com/song/backbone-EWlkD0On3z
 
 CHARITRA
 YouTube Video: https://youtu.be/AMWRoo0Sg-o?si=C0ry1S9ZGo8PZq5D
@@ -26,6 +27,16 @@ Apple Music: https://www.youtube.com/redirect?event=video_description&redir_toke
 JioSaavn: Not Available
 Amazon Music: https://www.youtube.com/redirect?event=video_description&redir_token=QUM4Zm9rVEF2TDd4ejJlZEkwMTVjRDBDY29MdnxBR3JiS2FrZ3N5MG9SblZTS3Z1amxXODRGTmU0RWpjdkpjb0xlV3kwcVVUZnhDQktwNFBUck1mVGRuaHBDbGljalNBTlpjX2Fob25Wc2NmNWlyVXBBWHBtbnQ1S0dXVE5HUjRT&q=https%3A%2F%2Fmusic.amazon.in%2Falbums%2FB0GXW5D39Y%3FmarketplaceId%3DA21TJRUUN4KGV%26musicTerritory%3DIN%26ref%3Ddm_sh_xrbFsEITufJCeNRAdLtexBNh3&v=AMWRoo0Sg-o
 YT Music: https://www.youtube.com/watch?v=68GyTn_0efQ
+Gaana: https://gaana.com/song/charitra-4361-7430
+
+LEGACY
+Youtube Video: https://youtu.be/SB4PYAhWKMk?si=FjO1X4pNjX5bDbnu
+Spotify: https://open.spotify.com/track/05plwUrEY1RiZ4UNfJn1jU?si=xMDXPPf5QbCncT9_1bfSQA&utm_source=copy-link
+Apple Music: https://music.apple.com/us/song/legacy/6794716656
+JioSaavn: https://www.jiosaavn.com/song/legacy/PBsZU01ZcFQ
+Amazon Music: https://music.amazon.ca/albums/B0HBLKRTDY?marketplaceId=A2EUQ1WTGCTBG2&musicTerritory=CA&ref=dm_sh_wBTIYT4aglkl3f0wNJRbc4BPc
+YT Music: https://www.youtube.com/watch?v=T5kJ4bOZUFM
+Gaana: https://www.youtube.com/redirect?event=video_description&redir_token=QUM4Zm9rUUtLaGpRWUFUbGd1QTBCeG84T010RnxBTl9pYzRmSEZtTUVzakFvU1pPOTdaREk4ZjBOYnZYVFFDTmVIcWFKbmJfeFZJampRRHJiRzhldUM4SnN0QkltbTNIa1lKdlFoREV3X3NtRU5RTzUxSlVnYm1YeFhaN3puajJV&q=https%3A%2F%2Fgaana.com%2Fsong%2Flegacy-VWR76Y0ebd&v=SB4PYAhWKMk
 
 CONTACT
 Email: pratikdhote52@gmail.com
