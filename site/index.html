@@ -174,19 +174,25 @@
       <div class="container">
         <h2>Lyrics</h2>
         
-        <div class="lyrics-selector">
-          <button class="lyrics-tab-btn active" data-song="charitra" aria-selected="true" role="tab" aria-controls="lyrics-content">CHARITRA</button>
-          <button class="lyrics-tab-btn" data-song="backbone" aria-selected="false" role="tab" aria-controls="lyrics-content">BACKBONE</button>
-          <button class="lyrics-tab-btn" data-song="legacy" aria-selected="false" role="tab" aria-controls="lyrics-content">LEGACY</button>
-        </div>
-
-        <div id="lyrics-content" class="lyrics-content" role="tabpanel">
-          <div class="lyrics-text" data-song="charitra" style="display:block"></div>
-          <div class="lyrics-text" data-song="backbone" style="display:none"></div>
-          <div class="lyrics-text" data-song="legacy" style="display:none"></div>
+        <div class="lyrics-buttons">
+          <button class="lyrics-btn-track" data-song="charitra" aria-label="Read CHARITRA lyrics">CHARITRA</button>
+          <button class="lyrics-btn-track" data-song="backbone" aria-label="Read BACKBONE lyrics">BACKBONE</button>
+          <button class="lyrics-btn-track" data-song="legacy" aria-label="Read LEGACY lyrics">LEGACY</button>
+          <button class="lyrics-btn-track lyrics-btn-coming" disabled aria-label="ROKO coming soon">ROKO</button>
         </div>
       </div>
     </section>
+
+    <!-- Lyrics Modal -->
+    <div id="lyrics-modal" class="lyrics-modal" aria-hidden="true" role="dialog" aria-labelledby="lyrics-modal-title">
+      <div class="lyrics-modal-content">
+        <div class="lyrics-modal-header">
+          <h3 id="lyrics-modal-title"></h3>
+          <button class="lyrics-modal-close" aria-label="Close lyrics">✕</button>
+        </div>
+        <div class="lyrics-modal-body" id="lyrics-modal-body"></div>
+      </div>
+    </div>
 
     <section id="gallery" class="section gallery">
       <div class="container">

@@ -10,77 +10,79 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
 
-  // Load lyrics from files and handle tab switching
-  const lyricsTabs = document.querySelectorAll('.lyrics-tab-btn');
-  const lyricsTexts = document.querySelectorAll('.lyrics-text');
-  
+  // Lyrics Modal
+  const lyricsModal = document.getElementById('lyrics-modal');
+  const lyricsModalTitle = document.getElementById('lyrics-modal-title');
+  const lyricsModalBody = document.getElementById('lyrics-modal-body');
+  const lyricsModalClose = document.querySelector('.lyrics-modal-close');
+
   const lyricFiles = {
     charitra: '../Lyrics/charitra.txt',
     backbone: '../Lyrics/backbone.txt',
     legacy: '../Lyrics/Legacy.txt'
   };
 
-  // Fetch and display lyrics
-  async function loadLyrics(song){
+  // Open lyrics modal
+  async function openLyricsModal(song){
     const file = lyricFiles[song];
     if(!file) return;
-    const textDiv = document.querySelector(`.lyrics-text[data-song="${song}"]`);
-    if(!textDiv) return;
-    
-    if(textDiv.textContent.trim() === ''){
-      try{
-        const response = await fetch(file);
-        if(response.ok){
-          const text = await response.text();
-          textDiv.textContent = text;
-          textDiv.style.display = 'block';
-        }else{
-          textDiv.textContent = 'Lyrics not available.';
-          textDiv.style.display = 'block';
-        }
-      }catch(e){
-        console.error(`Error loading ${song} lyrics:`, e);
-        textDiv.textContent = 'Error loading lyrics.';
-        textDiv.style.display = 'block';
+
+    // Set title
+    const titleText = song.charAt(0).toUpperCase() + song.slice(1);
+    lyricsModalTitle.textContent = titleText;
+
+    // Fetch and display lyrics
+    try{
+      const response = await fetch(file);
+      if(response.ok){
+        const text = await response.text();
+        lyricsModalBody.textContent = text;
+      }else{
+        lyricsModalBody.textContent = 'Lyrics not available.';
       }
-    }else{
-      textDiv.style.display = 'block';
+    }catch(e){
+      console.error(`Error loading ${song} lyrics:`, e);
+      lyricsModalBody.textContent = 'Error loading lyrics. Please try again.';
     }
+
+    // Show modal
+    lyricsModal.setAttribute('aria-hidden', 'false');
   }
 
-  // Switch lyrics on tab click
-  lyricsTabs.forEach(tab => {
-    tab.addEventListener('click', ()=>{
-      const song = tab.dataset.song;
-      
-      // Update tab states
-      lyricsTabs.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-      
-      // Update visible lyrics
-      lyricsTexts.forEach(t => t.style.display = 'none');
-      document.querySelector(`.lyrics-text[data-song="${song}"]`).style.display = 'block';
-      
-      // Load lyrics for this song
-      loadLyrics(song);
-    });
+  // Close lyrics modal
+  function closeLyricsModal(){
+    lyricsModal.setAttribute('aria-hidden', 'true');
+    lyricsModalBody.textContent = '';
+  }
+
+  // Close modal on close button click
+  lyricsModalClose.addEventListener('click', closeLyricsModal);
+
+  // Close modal on background click
+  lyricsModal.addEventListener('click', (e)=>{
+    if(e.target === lyricsModal) closeLyricsModal();
   });
 
-  // Load default (first tab) lyrics on page load
-  loadLyrics('charitra');
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && lyricsModal.getAttribute('aria-hidden') === 'false'){
+      closeLyricsModal();
+    }
+  });
+
+  // Lyrics buttons
+  document.querySelectorAll('.lyrics-btn-track:not(:disabled)').forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      const song = btn.dataset.song;
+      openLyricsModal(song);
+    });
+  });
 
   // Lyrics buttons from music section
   document.querySelectorAll('.lyrics-btn').forEach(btn => {
     btn.addEventListener('click', ()=>{
       const song = btn.dataset.song;
-      // Find and click the corresponding tab
-      document.querySelector(`.lyrics-tab-btn[data-song="${song}"]`)?.click();
-      // Scroll to lyrics section
-      document.getElementById('lyrics').scrollIntoView({behavior:'smooth'});
+      openLyricsModal(song);
     });
   });
 
