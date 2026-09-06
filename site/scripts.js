@@ -10,6 +10,75 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
 
+  // Load lyrics from files and handle tab switching
+  const lyricsTabs = document.querySelectorAll('.lyrics-tab-btn');
+  const lyricsTexts = document.querySelectorAll('.lyrics-text');
+  
+  const lyricFiles = {
+    charitra: '../Lyrics/charitra.txt',
+    backbone: '../Lyrics/backbone.txt',
+    legacy: '../Lyrics/Legacy.txt'
+  };
+
+  // Fetch and display lyrics
+  async function loadLyrics(song){
+    const file = lyricFiles[song];
+    if(!file) return;
+    const textDiv = document.querySelector(`.lyrics-text[data-song="${song}"]`);
+    if(!textDiv) return;
+    
+    if(textDiv.textContent.trim() === ''){
+      try{
+        const response = await fetch(file);
+        if(response.ok){
+          const text = await response.text();
+          textDiv.textContent = text;
+        }else{
+          textDiv.textContent = 'Lyrics not available.';
+        }
+      }catch(e){
+        console.error(`Error loading ${song} lyrics:`, e);
+        textDiv.textContent = 'Error loading lyrics.';
+      }
+    }
+  }
+
+  // Switch lyrics on tab click
+  lyricsTabs.forEach(tab => {
+    tab.addEventListener('click', ()=>{
+      const song = tab.dataset.song;
+      
+      // Update tab states
+      lyricsTabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      
+      // Update visible lyrics
+      lyricsTexts.forEach(t => t.style.display = 'none');
+      document.querySelector(`.lyrics-text[data-song="${song}"]`).style.display = 'block';
+      
+      // Load lyrics for this song
+      loadLyrics(song);
+    });
+  });
+
+  // Load default (first tab) lyrics on page load
+  loadLyrics('charitra');
+
+  // Lyrics buttons from music section
+  document.querySelectorAll('.lyrics-btn').forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      const song = btn.dataset.song;
+      // Find and click the corresponding tab
+      document.querySelector(`.lyrics-tab-btn[data-song="${song}"]`)?.click();
+      // Scroll to lyrics section
+      document.getElementById('lyrics').scrollIntoView({behavior:'smooth'});
+    });
+  });
+
   // Video modal
   const modal = document.getElementById('video-modal');
   const modalMedia = document.getElementById('modal-media');
@@ -71,7 +140,5 @@ document.addEventListener('DOMContentLoaded',function(){
     });
     img.addEventListener('keydown',(e)=>{ if(e.key==='Enter') img.click(); });
   });
-
-  // Header is now text-based logo; no image fallback handling required.
 
 });

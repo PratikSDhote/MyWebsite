@@ -34,7 +34,7 @@
         <a href="#about">ABOUT</a>
         <a href="#music">MUSIC</a>
         <a href="#videos">VIDEOS</a>
-        <a href="lyrics/backbone.html">LYRICS</a>
+        <a href="#lyrics">LYRICS</a>
         <a href="#gallery">GALLERY</a>
         <a href="#press">PRESS</a>
         <a href="#contact">CONTACT</a>
@@ -67,7 +67,7 @@
         </div>
         <div class="about-body">
           <h2>About</h2>
-          <p class="lead">ANARTH (∆N∆RTH) is a Marathi hip-hop artist. This section holds the artist biography and can be filled with verified content.</p>
+          <p class="lead">∆N∆RTH (ANARTH) is a Marathi hip-hop artist. This section holds the artist biography and can be filled with verified content.</p>
           <p>Musical identity, journey, and artistic philosophy can be placed here. The layout preserves Marathi text rendering with Noto Sans Devanagari.</p>
         </div>
       </div>
@@ -77,22 +77,8 @@
       <div class="container">
         <h2>Music</h2>
         <div class="grid music-grid">
-          <article class="release">
-            <picture>
-              <source srcset="../Assets/artworks/Backbone.png" media="(max-width:600px)">
-              <img src="../Assets/artworks/Backbone.png" alt="BACKBONE artwork" loading="lazy" decoding="async" />
-            </picture>
-            <div class="release-body">
-              <h3>BACKBONE</h3>
-              <p class="muted">Single — ANARTH</p>
-              <div class="release-ctas">
-                <a class="btn" href="https://open.spotify.com/track/7I72etfH4lrautP0kzrOaM?si=6904278e58cb4a6c" target="_blank" rel="noopener">Listen on Spotify</a>
-                <a class="btn" href="lyrics/backbone.html">Read Lyrics</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="release">
+          <!-- RELEASED TRACKS - Ordered: CHARITRA, BACKBONE, LEGACY -->
+          <article class="release" data-song="charitra">
             <picture>
               <source srcset="../Assets/artworks/CHARITRA%20(1).png" media="(max-width:600px)">
               <img src="../Assets/artworks/CHARITRA%20(1).png" alt="CHARITRA artwork" loading="lazy" decoding="async" />
@@ -102,8 +88,51 @@
               <p class="muted">Single — ANARTH</p>
               <div class="release-ctas">
                 <a class="btn" href="https://open.spotify.com/artist/0kLMYg4mAcI0nTroc95Nmc" target="_blank" rel="noopener">Listen</a>
-                <a class="btn" href="lyrics/charitra.html">Read Lyrics</a>
+                <button class="btn lyrics-btn" data-song="charitra" aria-label="Read CHARITRA lyrics">Read Lyrics</button>
               </div>
+            </div>
+          </article>
+
+          <article class="release" data-song="backbone">
+            <picture>
+              <source srcset="../Assets/artworks/Backbone.png" media="(max-width:600px)">
+              <img src="../Assets/artworks/Backbone.png" alt="BACKBONE artwork" loading="lazy" decoding="async" />
+            </picture>
+            <div class="release-body">
+              <h3>BACKBONE</h3>
+              <p class="muted">Single — ANARTH</p>
+              <div class="release-ctas">
+                <a class="btn" href="https://open.spotify.com/track/7I72etfH4lrautP0kzrOaM?si=6904278e58cb4a6c" target="_blank" rel="noopener">Listen on Spotify</a>
+                <button class="btn lyrics-btn" data-song="backbone" aria-label="Read BACKBONE lyrics">Read Lyrics</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="release" data-song="legacy">
+            <picture>
+              <source srcset="../Assets/artworks/LEGACY.png" media="(max-width:600px)">
+              <img src="../Assets/artworks/LEGACY.png" alt="LEGACY artwork" loading="lazy" decoding="async" />
+            </picture>
+            <div class="release-body">
+              <h3>LEGACY</h3>
+              <p class="muted">Single — ANARTH</p>
+              <div class="release-ctas">
+                <a class="btn" href="https://open.spotify.com/artist/0kLMYg4mAcI0nTroc95Nmc" target="_blank" rel="noopener">Listen</a>
+                <button class="btn lyrics-btn" data-song="legacy" aria-label="Read LEGACY lyrics">Read Lyrics</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- UPCOMING TRACK -->
+          <article class="release release-upcoming" data-song="roko">
+            <div class="upcoming-badge">COMING SOON</div>
+            <picture>
+              <source srcset="../Assets/artworks/RO%20KO.png" media="(max-width:600px)">
+              <img src="../Assets/artworks/RO%20KO.png" alt="ROKO artwork" loading="lazy" decoding="async" />
+            </picture>
+            <div class="release-body">
+              <h3>ROKO</h3>
+              <p class="muted">Upcoming Track — ANARTH</p>
             </div>
           </article>
         </div>
@@ -132,7 +161,18 @@
     <section id="lyrics" class="section lyrics-panel">
       <div class="container">
         <h2>Lyrics</h2>
-        <p class="muted">Full lyrics are available in a dedicated reader. Select a song above or from the Music section.</p>
+        
+        <div class="lyrics-selector">
+          <button class="lyrics-tab-btn active" data-song="charitra" aria-selected="true" role="tab" aria-controls="lyrics-content">CHARITRA</button>
+          <button class="lyrics-tab-btn" data-song="backbone" aria-selected="false" role="tab" aria-controls="lyrics-content">BACKBONE</button>
+          <button class="lyrics-tab-btn" data-song="legacy" aria-selected="false" role="tab" aria-controls="lyrics-content">LEGACY</button>
+        </div>
+
+        <div id="lyrics-content" class="lyrics-content" role="tabpanel">
+          <div class="lyrics-text" data-song="charitra" style="display:block"></div>
+          <div class="lyrics-text" data-song="backbone" style="display:none"></div>
+          <div class="lyrics-text" data-song="legacy" style="display:none"></div>
+        </div>
       </div>
     </section>
 
@@ -197,7 +237,7 @@
       <nav class="footer-nav">
         <a href="#music">Music</a>
         <a href="#videos">Videos</a>
-        <a href="lyrics/backbone.html">Lyrics</a>
+        <a href="#lyrics">Lyrics</a>
         <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
       </nav>
