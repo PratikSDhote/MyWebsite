@@ -130,15 +130,111 @@ document.addEventListener('DOMContentLoaded',function(){
     }
   }catch(e){console.warn(e)}
 
-  document.querySelectorAll('.video-card').forEach(card=>{
-    const handler = ()=>{
-      const id = card.dataset.youtubeId;
-      if(!id) return;
-      const iframe = `<iframe width="100%" height="540" src="https://www.youtube.com/embed/${id}?rel=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="video"></iframe>`;
-      openModal(iframe);
+  // YouTube Video Player - Thumbnail-first, lazy-loaded approach
+  const videoCards = document.querySelectorAll('.video-card:not(.video-card-upcoming)');
+  let currentVideoId = null;
+  let currentIframe = null;
+
+  function createYouTubePlayer(videoId, videoTitle) {
+    // Clean up previous player
+    if (currentIframe) {
+      currentIframe.remove();
+      currentIframe = null;
+    }
+    currentVideoId = videoId;
+
+    // Create container for responsive 16:9 aspect ratio
+    const playerContainer = document.createElement('div');
+    playerContainer.className = 'youtube-player-container';
+    playerContainer.setAttribute('role', 'region');
+    playerContainer.setAttribute('aria-label', `Playing ${videoTitle} video`);
+
+    // Create iframe with error event handler
+    const iframe = document.createElement('iframe');
+    iframe.className = 'youtube-iframe';
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    iframe.title = `YouTube video player - ${videoTitle}`;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.frameBorder = '0';
+
+    // Handle iframe load and error
+    iframe.onload = () => {
+      console.log(`YouTube player loaded for ${videoTitle}`);
     };
-    card.addEventListener('click',handler);
-    card.addEventListener('keydown',(e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); handler(); } });
+
+    iframe.onerror = () => {
+      console.error(`YouTube player failed to load for ${videoTitle}`);
+      showYouTubeError(videoTitle, videoId);
+    };
+
+    playerContainer.appendChild(iframe);
+    currentIframe = playerContainer;
+    return playerContainer;
+  }
+
+  function showYouTubeError(videoTitle, videoId) {
+    // Find the corresponding thumbnail and show error state
+    const card = document.querySelector(`[data-youtube-id="${videoId}"]`);
+    if (!card) return;
+
+    // Create error fallback content
+    const errorContainer = document.createElement('div');
+    errorContainer.className = 'youtube-player-error';
+    errorContainer.innerHTML = `
+      <div class="youtube-error-content">
+        <p>Unable to load video player</p>
+        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener" class="btn primary" style="margin-top:12px;">
+          Watch on YouTube
+        </a>
+      </div>
+    `;
+
+    // Clear and show error
+    const modalMedia = document.getElementById('modal-media');
+    modalMedia.innerHTML = '';
+    modalMedia.appendChild(errorContainer);
+  }
+
+  // Add click handlers to video cards
+  videoCards.forEach(card => {
+    const playBtn = card.querySelector('.play-btn');
+    const videoId = card.dataset.youtubeId;
+    const videoTitle = card.querySelector('h4')?.textContent || 'Video';
+
+    const handler = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Only load YouTube if not already loading/playing that video
+      if (currentVideoId !== videoId) {
+        const playerElement = createYouTubePlayer(videoId, videoTitle);
+        const modalMedia = document.getElementById('modal-media');
+        modalMedia.innerHTML = '';
+        modalMedia.appendChild(playerElement);
+      }
+
+      // Open modal
+      modal.setAttribute('aria-hidden', 'false');
+      const closeBtn = document.querySelector('.modal-close');
+      closeBtn && closeBtn.focus();
+    };
+
+    // Click on card
+    card.addEventListener('click', handler);
+
+    // Click on play button
+    if (playBtn) {
+      playBtn.addEventListener('click', handler);
+    }
+
+    // Keyboard support
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handler(e);
+      }
+    });
   });
 
   // Gallery click -> modal image
